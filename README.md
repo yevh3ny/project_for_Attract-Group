@@ -2,7 +2,7 @@
 
 1. Настроил структуру проекта 
 
-project/
+project_for_Attract_Group/
 
 ├── nginx/
 
