@@ -1,0 +1,41 @@
+version: "3.8" # Выбираем текущюю версию
+services: # Сервисы, которые будем устанавливать
+  nginx: # Первый сервис - Nginx
+    image: nginx:latest # из образа nginx с тегом последний
+    ports: # пробрасываем порты на контейрнер
+      - 80:80
+    volumes: # перенесем настройка nginx'a
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on: # указывеам зависимости
+      - php
+    logging: # Ведем учет стандартного вывода контейнера
+      driver: "json-file" # указываем драйвер журнала
+      options: # указываем параметры для служб
+        max-size: "10m"
+        max-file: "3"
+    networks:
+      - <network-name> # указываю имя сети для режима swarm
+
+  php: # второй сервис - PHP
+    build: # место с докерфайлом по которому соберем PHP 
+      context: ./php
+    volumes:
+      - ./php:/var/www/html
+    deploy: # настройка ограничений, как вы просили
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M
+      replicas: 2
+
+    logging: # Ведем учет стандартного вывода контейнера
+      driver: "json-file" # указываем драйвер журнала
+      options: # указываем параметры для служб
+        max-size: "10m"
+        max-file: "3"    
+    networks:
+      - <network-name>
+
+  networks: # описываем сеть
+    <network-name>:
+      external: true
