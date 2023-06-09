@@ -3,10 +3,15 @@
 1. Настроил структуру проекта 
 
 project/
+
 ├── nginx/
+
 │   └── nginx.conf
+
 ├── php/
+
 │   └── Dockerfile
+
 └── docker-compose.yml
 
 2. Настроил NGINX, точнее создал в nginx каталоге файл nginx.conf. 
