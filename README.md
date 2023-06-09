@@ -2,11 +2,16 @@
 
 1. Настроил структуру проекта 
 
-project/
+project_for_Attract_Group/
+
 ├── nginx/
+
 │   └── nginx.conf
+
 ├── php/
+
 │   └── Dockerfile
+
 └── docker-compose.yml
 
 2. Настроил NGINX, точнее создал в nginx каталоге файл nginx.conf. 
